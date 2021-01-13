@@ -1,0 +1,11 @@
+---
+  - name: initial playbook
+    hosts: all
+    gather_facts: false
+    tasks:
+      - name: Display Hostname
+        debug:
+          msg: "Router name is {{ hostname }}"
+      - name: Display OS
+        debug: 
+          msg: "{{ hostname }} is running {{ os }}"

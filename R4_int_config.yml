@@ -1,0 +1,16 @@
+- name: Setting up ip addresses on the R4 router and enabling the interfaces
+  hosts: R4
+  gather_facts: false
+  tasks:
+    - name: Enable the interface status to up On R4 
+      ios_interface:
+        aggregate:
+          - { name: GigabitEthernet0/2,  description: ospf-interface-1 }
+          - { name: GigabitEthernet0/3,  description: ospf-interface-2 }
+        enabled: true
+    - name: Merge provided configuration with device configuration
+      ios_l3_interface:
+        aggregate:
+          - { name: GigabitEthernet0/2, ipv4: 10.0.24.4/24 }
+          - { name: GigabitEthernet0/3, ipv4: 10.0.34.4/24 }
+        state: present

@@ -1,0 +1,11 @@
+- name: setting up the ospf config on the interfaces
+  hosts: all_routers
+  gather_facts: false
+  tasks:
+    - name: Enable ospf on the interfaces
+      ios_config: 
+        lines:
+          -  router ospf 1
+          -  network 10.0.0.0 0.255.255.255 area 0
+        save_when: modified
+        

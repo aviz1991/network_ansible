@@ -1,0 +1,15 @@
+---
+- name: using conditionals
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Run for edge nodes only
+      debug: 
+        msg: "Router name is {{ hostname }}"
+      when: "'edge' in group_names"
+    
+    - name: Run for R1 node only
+      debug:
+        msg: "{{ hostname }} is running {{ os }}"
+      when: 
+        - inventory_hostname == 'R1'

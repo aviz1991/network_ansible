@@ -1,0 +1,10 @@
+- name: setting up passive interface in ospf
+  hosts: all_routers
+  gather_facts: false
+  tasks:
+    - name: Enable passive interface on g0/2
+      ios_config: 
+        lines:
+          - router ospf 1
+          - passive-interface GigabitEthernet0/1
+        save_when: modified
